@@ -8,13 +8,13 @@ class Example extends React.Component {
     }
 
     componentDidMount() {
-        console.log('test');
+        // console.log('test');
     }
 
     render() {
         return (
             <div>
-                <MyComponent />
+                <MyComponent  dias="0" horas="0" minutos="0" segundos="05"/>
             </div>
         )
     }

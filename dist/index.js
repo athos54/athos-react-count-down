@@ -41,6 +41,12 @@ var Timer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
+    if (_this.props.dias == 'undefined') {
+      console.log('if');
+    } else {
+
+      console.log('else');
+    }
     _this.state = {
       dias: ("0" + _this.props.dias).slice(-2),
       horas: ("0" + _this.props.horas).slice(-2),
@@ -67,7 +73,7 @@ var Timer = function (_React$Component) {
   }, {
     key: 'tick',
     value: function tick() {
-      if (this.state.segundos === 0, this.state.minutos === 0, this.state.horas === 0, this.state.dias === 0) {
+      if (this.state.segundos === "0", this.state.minutos === "0", this.state.horas === "0", this.state.dias === "0") {
         this.pararTimer();
       }
       if (this.state.segundos > 0) {
