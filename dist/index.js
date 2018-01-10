@@ -41,12 +41,6 @@ var Timer = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (Timer.__proto__ || Object.getPrototypeOf(Timer)).call(this, props));
 
-    if (_this.props.dias == 'undefined') {
-      console.log('if');
-    } else {
-
-      console.log('else');
-    }
     _this.state = {
       dias: ("0" + _this.props.dias).slice(-2),
       horas: ("0" + _this.props.horas).slice(-2),
@@ -73,19 +67,20 @@ var Timer = function (_React$Component) {
   }, {
     key: 'tick',
     value: function tick() {
-      if (this.state.segundos === "0", this.state.minutos === "0", this.state.horas === "0", this.state.dias === "0") {
+      if (this.state.segundos === "00" && this.state.minutos === "00" && this.state.horas === "00" && this.state.dias === "00") {
         this.pararTimer();
-      }
-      if (this.state.segundos > 0) {
-        this.descontarSegundo();
       } else {
-        if (this.state.minutos > 0) {
-          this.descontarMinuto();
+        if (this.state.segundos > 0) {
+          this.descontarSegundo();
         } else {
-          if (this.state.horas > 0) {
-            this.descontarHora();
+          if (this.state.minutos > 0) {
+            this.descontarMinuto();
           } else {
-            this.descontarDia();
+            if (this.state.horas > 0) {
+              this.descontarHora();
+            } else {
+              this.descontarDia();
+            }
           }
         }
       }
@@ -93,12 +88,29 @@ var Timer = function (_React$Component) {
   }, {
     key: 'pararTimer',
     value: function pararTimer() {
-      this.componentWillUmount();
+      console.log('parar');
+      clearInterval(this.timerID);
       this.setState({
         dias: "00",
         horas: "00",
         minutos: "00",
         segundos: "00"
+      });
+      this.cambiarColor();
+    }
+  }, {
+    key: 'cambiarColor',
+    value: function cambiarColor() {
+      var cajas = document.querySelectorAll('.ont');
+      var time = 0;
+      cajas.forEach(function (caja) {
+        // caja.style.WebkitTransition = "all 2s"; // Code for Safari 3.1 to 6.0
+        // caja.style.transition = "all 2s";       // Standard syntax
+        // caja.classList.remove("color");
+        setTimeout(function () {
+          caja.classList.toggle("finish");
+        }, time);
+        time += 100;
       });
     }
   }, {
@@ -142,13 +154,8 @@ var Timer = function (_React$Component) {
         'div',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h1',
-          null,
-          'Hello, world!'
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'ont' },
+          { className: 'ont color' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'numbers' },
@@ -162,7 +169,7 @@ var Timer = function (_React$Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'ont' },
+          { className: 'ont color' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'numbers' },
@@ -176,7 +183,7 @@ var Timer = function (_React$Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'ont' },
+          { className: 'ont color' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'numbers' },
@@ -190,7 +197,7 @@ var Timer = function (_React$Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'ont' },
+          { className: 'ont color' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { className: 'numbers' },
@@ -255,7 +262,7 @@ exports = module.exports = __webpack_require__(29)(false);
 
 
 // module
-exports.push([module.i, ".ont{\n    display: inline-block;\n    width: 100px;\n    height: 100px;\n    background: #9c9c9c;\n    background-image: -webkit-linear-gradient(top, #9c9c9c, #575757);\n    background-image: -moz-linear-gradient(top, #9c9c9c, #575757);\n    background-image: -ms-linear-gradient(top, #9c9c9c, #575757);\n    background-image: -o-linear-gradient(top, #9c9c9c, #575757);\n    background-image: linear-gradient(to bottom, #9c9c9c, #575757);\n    -webkit-border-radius: 28;\n    -moz-border-radius: 28;\n    border-radius: 28px;\n    font-family: Arial;\n    color: #ffffff;\n    font-size: 60px;\n    /*padding: 10px 20px 10px 20px;*/\n    text-decoration: none;\n    border: 1px solid black;\n    margin: 5px\n  }\n\n.tipo{\n  font-size:10px;\n  display: block;\n}\n\n.numbers{\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);}\n", ""]);
+exports.push([module.i, ".color{\n  background: #9c9c9c;\n  background: -webkit-linear-gradient(top, #9c9c9c, #575757);\n  background: -moz-linear-gradient(top, #9c9c9c, #575757);\n  background: -ms-linear-gradient(top, #9c9c9c, #575757);\n  background: -o-linear-gradient(top, #9c9c9c, #575757);\n  background: linear-gradient(to bottom, #9c9c9c, #575757);\n  /*-webkit-transition: all 1s linear;\n  -moz-transition: all 1s linear;\n  -o-transition: all 1s linear;\n  transition: all 1s linear;*/\n  position: relative;\n  left: 0\n}\n\n.color.finish{\n  transform: rotate(360deg);\n  -webkit-transition: all 0.2s linear;\n  -moz-transition: all 0.2s linear;\n  -o-transition: all 0.2s linear;\n  transition: all 0.2s linear;\n  background: #6d91bb;\n  background: -webkit-linear-gradient(top, #6d91bb, #074c79);\n  background: -moz-linear-gradient(top, #6d91bb, #074c79);\n  background: -ms-linear-gradient(top, #6d91bb, #074c79);\n  background: -o-linear-gradient(top, #6d91bb, #074c79);\n  background: linear-gradient(to bottom, #6d91bb, #074c79);\n}\n\n.ont{\n    display: inline-block;\n    width: 100px;\n    height: 100px;\n    -webkit-border-radius: 28;\n    -moz-border-radius: 28;\n    border-radius: 28px;\n    font-family: Arial;\n    color: #ffffff;\n    font-size: 60px;\n    /*padding: 10px 20px 10px 20px;*/\n    text-decoration: none;\n    border: 1px solid black;\n    margin: 5px;\n    text-align: center\n  }\n\n.tipo{\n  font-size:10px;\n  display: block;\n}\n\n.numbers{\n  position: relative;\n  top: 50%;\n  transform: translateY(-50%);}\n", ""]);
 
 // exports
 
