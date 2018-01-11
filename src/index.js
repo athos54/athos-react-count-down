@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './Timer.css';
+import Draggable from 'react-draggable';
 
 class Timer extends React.Component {
   constructor(props) {
@@ -100,34 +101,77 @@ class Timer extends React.Component {
     })
   }
 
-  render() {
-    return (
+
+
+
+  reloj(){
+
+      return (
         <div>
-          <div className="ont color">
-            <div className="numbers">
-              <span className="tipo">Dias</span>
-                {this.state.dias}
-              </div>
-            </div>
-          <div className="ont color">
-            <div className="numbers">
-              <span className="tipo">Horas</span>
-                {this.state.horas}
-              </div>
-            </div>
-          <div className="ont color">
-            <div className="numbers">
-              <span className="tipo">Minutos</span>
-                {this.state.minutos}</div>
-              </div>
-          <div className="ont color">
-            <div className="numbers">
-              <span className="tipo">Segundos</span>
-                {this.state.segundos}
-              </div>
-            </div>
+
+        <div className="ont color">
+        <div className="numbers">
+        <span className="tipo">Dias</span>
+        {this.state.dias}
         </div>
+        </div>
+        <div className="ont color">
+        <div className="numbers">
+        <span className="tipo">Horas</span>
+        {this.state.horas}
+        </div>
+        </div>
+        <div className="ont color">
+        <div className="numbers">
+        <span className="tipo">Minutos</span>
+        {this.state.minutos}
+        </div>
+        </div>
+        <div className="ont color">
+        <div className="numbers">
+        <span className="tipo">Segundos</span>
+        {this.state.segundos}
+        </div>
+        </div>
+
+        </div>
+      );
+
+  }
+
+  relojArrastrable(algo){
+    return (
+      <div>
+      <Draggable
+        axis="both"
+        handle=".handle"
+        defaultPosition={{x: 0, y: 0}}
+        position={null}
+        grid={[1, 1]}
+        onStart={this.handleStart}
+        onDrag={this.handleDrag}
+        onStop={this.handleStop}>
+          <div className="handle">
+            {algo}
+          </div>
+        </Draggable>
+      </div>
     );
+  }
+
+  salida(){
+    console.log('aa',this.props.arrastrable)
+
+    if(this.props.arrastrable=="true"){
+      return (this.relojArrastrable(this.reloj()));
+    }else{
+      return (this.reloj());
+
+    }
+  }
+
+  render() {
+    return (<div>{this.salida()}</div>);
   }
 }
 
