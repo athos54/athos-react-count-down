@@ -1,6 +1,6 @@
 {
   "name": "athos-react-count-down",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "scripts": {
     "build": "webpack --config webpack.config.babel.js",
     "release": "webpack --p --config webpack.config.babel.js",
@@ -51,6 +51,10 @@
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ]
+    ],
+    "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/athos54/athos-react-count-down"
+    }
   }
 }
